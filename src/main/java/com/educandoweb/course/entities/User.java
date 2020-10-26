@@ -1,15 +1,31 @@
 package com.educandoweb.course.entities;
 
+import com.sun.istack.NotNull;
+
+import javax.persistence.*;
 import java.io.Serializable;
 import java.util.Objects;
 
+@Entity
 public class User implements Serializable {
 
     private static final long serialVersionUID = 1L;
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+
+    @NotNull
+    @Column(length = 50)
     private String name;
+
+    @Column(length = 30)
     private String email;
+
+    @Column(length = 13)
     private String phone;
+
+    @Column(length = 15)
     private String password;
 
     public User() {
