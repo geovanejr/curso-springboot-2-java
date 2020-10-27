@@ -2,6 +2,7 @@ package com.educandoweb.course.config;
 
 import com.educandoweb.course.entities.Order;
 import com.educandoweb.course.entities.User;
+import com.educandoweb.course.entities.enums.OrderStatus;
 import com.educandoweb.course.repositories.OrderRepository;
 import com.educandoweb.course.repositories.UserRepository;
 import org.apache.tomcat.jni.Local;
@@ -32,14 +33,14 @@ public class TestConfig implements CommandLineRunner {
         User u2 = new User(null, "Alex Green", "alex@gmail.com", "977777777", "123456");
         User u3 = new User(null, "Geovane Junior", "geovane.gjunior@gmail.com", "11999468056", "1234");
 
-        Order o1 = new Order(null, LocalDateTime.now().toInstant(ZoneOffset.UTC), u1);
+        Order o1 = new Order(null, LocalDateTime.now().toInstant(ZoneOffset.UTC), OrderStatus.CANCELED, u1);
 
         Thread.sleep(1000);
-        Order o2 = new Order(null, LocalDateTime.now().toInstant(ZoneOffset.UTC), u2);
+        Order o2 = new Order(null, LocalDateTime.now().toInstant(ZoneOffset.UTC), OrderStatus.DELIVERED, u2);
         Thread.sleep(1000);
-        Order o3 = new Order(null, LocalDateTime.now().toInstant(ZoneOffset.UTC), u1);
+        Order o3 = new Order(null, LocalDateTime.now().toInstant(ZoneOffset.UTC), OrderStatus.PAID, u1);
         Thread.sleep(1000);
-        Order o4 = new Order(null, LocalDateTime.now().toInstant(ZoneOffset.UTC), u3);
+        Order o4 = new Order(null, LocalDateTime.now().toInstant(ZoneOffset.UTC), OrderStatus.WAITING_PAYMENT, u3);
 
         userRepository.saveAll(Arrays.asList(u1, u2, u3));
         orderRepository.saveAll(Arrays.asList(o1, o2, o3, o4));
