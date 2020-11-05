@@ -26,13 +26,27 @@ public class UserService {
         return user.get();
     }
 
-    public User insert(User user) {
+    public User insertUser(User user) {
 
         return userRepository.save(user);
     }
 
-    public void delete(Long id) {
+    public void deleteUser(Long id) {
 
         userRepository.deleteById(id);
+    }
+
+    public User updateUser(Long id, User user) {
+
+        User entity = userRepository.getOne(id);
+        updateData(entity, user);
+        return userRepository.save(entity);
+    }
+
+    private void updateData(User entity, User user) {
+
+        entity.setName(user.getName());
+        entity.setEmail(user.getEmail());
+        entity.setPhone(user.getPhone());
     }
 }
